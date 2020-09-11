@@ -13,4 +13,6 @@
 <p>Nome: {{ $car->user->name }}</p>
 <p>Email: {{ $car->user->email }}</p>
 
+<a href="{{route('cars.edit', $car)}}">Modifica auto ></a>
+<br>
 <a href="{{route('cars.index')}}">< Torna indietro</a>

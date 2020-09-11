@@ -1,4 +1,4 @@
-<h1>Aggiungi auto</h1>
+<h1>Modifica auto</h1>
 
 @if ($errors->any())
     <div class="alert alert-danger">
@@ -10,28 +10,28 @@
     </div>
 @endif
 
-<form action="{{route('cars.store')}}" method="post">
+<form action="{{route('cars.update', $car)}}" method="post">
   @csrf
-  @method('POST')
+  @method('PUT')
 
   <label>Produttore</label>
-  <input type="text" name="manufacturer" value="{{old('manufacturer')}}">
+  <input type="text" name="manufacturer" value="{{$car->manufacturer}}">
 
   <label>Anno</label>
-  <input type="number" name="year" value="{{old('year')}}">
+  <input type="number" name="year" value="{{$car->year}}">
 
   <label>Motore</label>
-  <input type="text" name="engine" value="{{old('engine')}}">
+  <input type="text" name="engine" value="{{$car->engine}}">
 
   <label>Targa</label>
-  <input type="text" name="plate" value="{{old('plate')}}">
+  <input type="text" name="plate" value="{{$car->plate}}">
   <br>
   <br>
 
   <label>Tag:</label>
   <div class="checkboxes">
     @foreach ($tags as $tag)
-      <input type="checkbox" name="tags[]" value="{{$tag->id}}">
+      <input type="checkbox" name="tags[]" value="{{$tag->id}}" {{($car->tags->contains($tag)) ? 'checked' : ''}}>
       <label>{{$tag->name}}</label>
       <br>
     @endforeach
@@ -42,15 +42,14 @@
   <div class="owners">
     <select name="user_id">
       @foreach ($users as $user)
-        <option value="{{$user->id}}">{{$user->name}}</option>
+        <option value="{{$user->id}}" {{($user->id == $car->user_id) ? 'selected' : ""}}>{{$user->name}}</option>
       @endforeach
     </select>
     <br>
   </div>
   <br>
 
-
   <input type="submit" value="Invia">
 </form>
 
-<a href="{{route('cars.index')}}">< Torna indietro</a>
+<a href="{{route('cars.show', $car)}}">< Torna indietro</a>

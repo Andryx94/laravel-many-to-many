@@ -40,7 +40,7 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-      $data_validation->validate([
+      $validatedData = $request->validate([
         'manufacturer' => 'required|max:255',
         'year' => 'required|integer|min:1900|max:2020',
         'engine' => 'required|max:255',
@@ -51,11 +51,7 @@ class CarController extends Controller
       $data = $request->all();
 
       $new_car = new Car();
-      $new_car->manufacturer = $data['manufacturer'];
-      $new_car->year = $data['year'];
-      $new_car->engine = $data['engine'];
-      $new_car->plate = $data['plate'];
-      $new_car->user_id = $data['user_id'];
+      $new_car->fill($data);
       $new_car->save();
 
       if (isset($data['tags'])) {
@@ -82,9 +78,11 @@ class CarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Car $car)
     {
-        //
+      $tags = Tag::all();
+      $users = User::all();
+      return view('cars.edit', compact('car','tags', 'users'));
     }
 
     /**
@@ -94,9 +92,27 @@ class CarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Car $car)
     {
-        //
+      $validatedData = $request->validate([
+        'manufacturer' => 'required|max:255',
+        'year' => 'required|integer|min:1900|max:2020',
+        'engine' => 'required|max:255',
+        'plate' => 'required|max:255',
+        'user_id' => 'required|integer|max:255',
+      ]);
+
+      $data = $request->all();
+
+      $car->update($data);
+      $car->save();
+
+      if (isset($data['tags'])) {
+        $car->tags()->detach();
+        $car->tags()->sync($data['tags']);
+      }
+
+      return redirect()->route('cars.show', $car);
     }
 
     /**
@@ -105,8 +121,10 @@ class CarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Car $car)
     {
-        //
+      $car->tags()->detach();
+      $car->delete();
+      return redirect()->route('cars.index');
     }
 }
