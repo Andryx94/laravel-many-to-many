@@ -1,0 +1,25 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  .logo {
+    img {
+      width: 300px;
+    }
+  }
+  .add-auto{
+    a {
+      background-color: red;
+      padding: 10px;
+      border-radius: 10px;
+      color: white;
+      text-transform: uppercase;
+      padding: 10px;
+
+      &:last-child {
+        background-color: black;
+      }
+    }
+  }
+}
