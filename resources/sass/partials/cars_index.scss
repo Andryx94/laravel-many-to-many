@@ -1,0 +1,23 @@
+main {
+  .cars_index{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    text-align: center;
+    max-width: 1000px;
+    margin: 0 auto;
+    .box {
+      width: calc(100%/2);
+      a {
+        display: inline-block;
+        padding: 20px;
+        font-size: 25px;
+        font-weight: 800;
+        color: black;
+        &:hover{
+          color: red;
+        }
+      }
+    }
+  }
+}

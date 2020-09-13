@@ -1,20 +1,27 @@
 @extends('layouts.app')
 @section('section')
-  <h1>{{$car->manufacturer}} ({{$car->year}})</h1>
-  <p>Motore: {{$car->engine}}</p>
-  <p>Targa: {{$car->plate}}</p>
+  <div class="cars_show">
+    <h1>{{$car->manufacturer}} {{$car->model}} ({{$car->year}})</h1>
 
-  <p>Tag:</p>
-  <ul>
-    @foreach ($car->tags as $tag)
-      <li>{{$tag->name}}</li>
-    @endforeach
-  </ul>
+    <p>Motore: {{$car->engine}}</p>
+    <p>Targa: {{$car->plate}}</p>
+    <ul>
+      @foreach ($car->tags as $tag)
+        <li>{{$tag->name}}</li>
+      @endforeach
+    </ul>
 
-  <h2>Proprietario</h2>
-  <p>Nome: {{ $car->user->name }}</p>
-  <p>Email: {{ $car->user->email }}</p>
+    <h2>Proprietario</h2>
 
-  <a href="{{route('cars.edit', $car)}}">Modifica auto ></a>
-  <br>
+    <p>Nome: {{ $car->user->name }}</p>
+    <p>Email: {{ $car->user->email }}</p>
+    <p>Numero: +39 {{ $car->user->phone_number }}</p>
+
+    <a href="{{route('cars.edit', $car)}}" class="button">Modifica auto</a>
+    <form action="{{ route('cars.destroy', $car->id)}}" method="post">
+      @csrf
+      @method('DELETE')
+      <input type="submit" value="Cancella auto" class="button delete">
+    </form>
+  </div>
 @endsection

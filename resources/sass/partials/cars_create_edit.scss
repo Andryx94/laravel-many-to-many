@@ -1,0 +1,20 @@
+main {
+  .cars_create_edit{
+    text-align: center;
+    label{
+      font-weight: 800;
+    }
+
+    .form, .checkboxes, .owners {
+      padding: 12px 0;
+    }
+    .checkboxes{
+      input{
+        margin: 0 5px;
+      }
+    }
+    .button{
+      @include button;
+    }
+  }
+}

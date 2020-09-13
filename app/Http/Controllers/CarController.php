@@ -42,6 +42,7 @@ class CarController extends Controller
     {
       $validatedData = $request->validate([
         'manufacturer' => 'required|max:255',
+        'model' => 'required|max:255',
         'year' => 'required|integer|min:1900|max:2020',
         'engine' => 'required|max:255',
         'plate' => 'required|max:255',
@@ -96,6 +97,7 @@ class CarController extends Controller
     {
       $validatedData = $request->validate([
         'manufacturer' => 'required|max:255',
+        'model' => 'required|max:255',
         'year' => 'required|integer|min:1900|max:2020',
         'engine' => 'required|max:255',
         'plate' => 'required|max:255',

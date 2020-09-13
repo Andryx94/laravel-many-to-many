@@ -1,17 +1,11 @@
 @extends('layouts.app')
 @section('section')
-  <ul>
-    @foreach ($cars as $car)
-      <li>
-        <a href="{{route('cars.show',$car)}}">{{$car->manufacturer}} ({{$car->year}})</a>
 
-        <form action="{{ route('cars.destroy', $car->id)}}" method="post">
-          @csrf
-          @method('DELETE')
-          <input type="submit" value="Cancella">
-        </form>
-      </li>
-      <hr>
+  <div class="cars_index">
+    @foreach ($cars as $car)
+      <div class="box">
+        <a href="{{route('cars.show',$car)}}">{{$car->manufacturer}} {{$car->model}} ({{$car->year}})</a>
+      </div>
     @endforeach
-  </ul>
+  </div>
 @endsection

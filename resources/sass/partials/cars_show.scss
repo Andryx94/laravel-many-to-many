@@ -1,0 +1,25 @@
+main {
+  .cars_show{
+    text-align: center;
+
+    p, ul{
+      padding: 5px;
+    }
+
+    h2{
+      padding-top: 20px;
+    }
+
+    .button {
+      @include button;
+      margin-top: 20px;
+    }
+    & .delete {
+      color: red;
+    }
+
+    form{
+      display: inline-block;
+    }
+  }
+}

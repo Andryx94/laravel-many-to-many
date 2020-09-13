@@ -1,56 +1,65 @@
 @extends('layouts.app')
 @section('section')
-  <h1>Modifica auto</h1>
 
-  @if ($errors->any())
-      <div class="alert alert-danger">
-          <ul>
-              @foreach ($errors->all() as $error)
-                  <li>{{ $error }}</li>
-              @endforeach
-          </ul>
+  <div class="cars_create_edit">
+    <h1>Modifica auto</h1>
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <form action="{{route('cars.update', $car)}}" method="post">
+      @csrf
+      @method('PUT')
+
+      <div class="form manufacture">
+        <label>Produttore</label>
+        <input type="text" name="manufacturer" value="{{$car->manufacturer}}">
       </div>
-  @endif
 
-  <form action="{{route('cars.update', $car)}}" method="post">
-    @csrf
-    @method('PUT')
+      <div class="form model">
+        <label>Modello</label>
+        <input type="text" name="model" value="{{$car->model}}">
+      </div>
 
-    <label>Produttore</label>
-    <input type="text" name="manufacturer" value="{{$car->manufacturer}}">
+      <div class="form engine">
+        <label>Motore</label>
+        <input type="text" name="engine" value="{{$car->engine}}">
+      </div>
 
-    <label>Anno</label>
-    <input type="number" name="year" value="{{$car->year}}">
+      <div class="form year">
+        <label>Anno</label>
+        <input type="number" name="year" value="{{$car->year}}">
+      </div>
 
-    <label>Motore</label>
-    <input type="text" name="engine" value="{{$car->engine}}">
+      <div class="form plate">
+        <label>Targa</label>
+        <input type="text" name="plate" value="{{$car->plate}}">
+      </div>
 
-    <label>Targa</label>
-    <input type="text" name="plate" value="{{$car->plate}}">
-    <br>
-    <br>
-
-    <label>Tag:</label>
-    <div class="checkboxes">
-      @foreach ($tags as $tag)
-        <input type="checkbox" name="tags[]" value="{{$tag->id}}" {{($car->tags->contains($tag)) ? 'checked' : ''}}>
-        <label>{{$tag->name}}</label>
-        <br>
-      @endforeach
-    </div>
-    <br>
-
-    <label>Proprietario</label>
-    <div class="owners">
-      <select name="user_id">
-        @foreach ($users as $user)
-          <option value="{{$user->id}}" {{($user->id == $car->user_id) ? 'selected' : ""}}>{{$user->name}}</option>
+      <div class="checkboxes">
+        @foreach ($tags as $tag)
+          <input type="checkbox" name="tags[]" value="{{$tag->id}}" {{($car->tags->contains($tag)) ? 'checked' : ''}}>
+          <label>{{$tag->name}}</label>
         @endforeach
-      </select>
-      <br>
-    </div>
-    <br>
+      </div>
 
-    <input type="submit" value="Invia">
-  </form>
+      <div class="owners">
+        <label>Proprietario</label>
+        <select name="user_id">
+          @foreach ($users as $user)
+            <option value="{{$user->id}}" {{($user->id == $car->user_id) ? 'selected' : ""}}>{{$user->name}}</option>
+          @endforeach
+        </select>
+      </div>
+
+      <input type="submit" value="Modifica" class="button">
+    </form>
+  </div>
 @endsection

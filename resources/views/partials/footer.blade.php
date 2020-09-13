@@ -1,1 +1,1 @@
-<h3>Made by: Andrea Maschio</h3>
+<h3>© 2020 - Andrea Maschio </h3>

@@ -1,5 +1,5 @@
 <div class="logo">
-  <img src="{{asset('img/logo.png')}}" alt="">
+  <img src="{{asset('img/logo.png')}}" alt="Database auto" class="header_logo">
 </div>
 
 <div class="add-auto">
