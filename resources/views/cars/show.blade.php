@@ -21,7 +21,7 @@
     <form action="{{ route('cars.destroy', $car->id)}}" method="post">
       @csrf
       @method('DELETE')
-      <input type="submit" value="Cancella auto" class="button delete">
+      <input type="submit" value="Cancella auto" class="button delete" onclick="return confirm('Sei sicuro di voler cancellare {{$car->manufacturer}} {{$car->model}} ({{$car->year}})?')">
     </form>
   </div>
 @endsection
