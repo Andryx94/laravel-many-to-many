@@ -27,6 +27,12 @@ header .logo img {
   cursor: pointer;
 }
 
+@media screen and (max-width: 600px) {
+  header .logo {
+    padding-bottom: 20px;
+  }
+}
+
 header .add-auto a {
   display: inline-block;
   background-color: black;
@@ -41,6 +47,12 @@ header .add-auto a {
 
 header .add-auto a:first-child {
   background-color: red;
+}
+
+@media screen and (max-width: 600px) {
+  header {
+    flex-direction: column;
+  }
 }
 
 footer {

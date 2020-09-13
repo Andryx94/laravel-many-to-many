@@ -10,6 +10,9 @@ header {
       max-width: 300px;
       cursor: pointer;
     }
+    @media screen and (max-width: 600px) {
+      padding-bottom: 20px;
+    }
   }
   .add-auto{
     a {
@@ -18,5 +21,8 @@ header {
         background-color: red;
       }
     }
+  }
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
   }
 }
